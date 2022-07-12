@@ -1,0 +1,73 @@
+body { font-family: "Montserrat", sans-serif; display: -webkit-box; display: -ms-flexbox; display: flex; background: -webkit-gradient(linear, left top, right bottom, from(#edc1d3), to(#91bdec)); background: linear-gradient(to bottom right, #edc1d3 0%, #91bdec 100%); height: 100vh; width: 100vw; background-repeat: no-repeat; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; margin: 0; background-size: cover; }
+
+@-webkit-keyframes tanim { 0% { -webkit-transform: rotate(-20deg); transform: rotate(-20deg); }
+  25% { -webkit-transform: rotate(20deg); transform: rotate(20deg); }
+  50% { -webkit-transform: rotate(-20deg); transform: rotate(-20deg); }
+  100% { -webkit-transform: rotate(0deg); transform: rotate(0deg); } }
+
+@keyframes tanim { 0% { -webkit-transform: rotate(-20deg); transform: rotate(-20deg); }
+  25% { -webkit-transform: rotate(20deg); transform: rotate(20deg); }
+  50% { -webkit-transform: rotate(-20deg); transform: rotate(-20deg); }
+  100% { -webkit-transform: rotate(0deg); transform: rotate(0deg); } }
+
+.container { padding: 38px; width: calc(1374px - 76px); height: 70vh; display: -ms-grid; display: grid; -ms-flex-line-pack: start; align-content: start; -ms-grid-columns: 1fr; grid-template-columns: 1fr; -ms-grid-rows: (32px 1fr)[2]; grid-template-rows: repeat(2, 32px 1fr); grid-column-gap: 0px; grid-row-gap: 0px; background-color: #fff; border-radius: 30px; -webkit-box-shadow: 0px 4px 40px #8CA4D8; box-shadow: 0px 4px 40px #8CA4D8; grid-auto-flow: column; }
+
+.container-top { margin: 0; -ms-grid-row: 1; -ms-grid-row-span: 1; -ms-grid-column: 1; -ms-grid-column-span: 1; grid-area: 1 / 1 / 2 / 2; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; width: 100%; height: 32px; -webkit-box-pack: start; -ms-flex-pack: start; justify-content: flex-start; }
+
+.container-top__search { width: 250px; height: 32px; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; margin-right: auto; }
+
+.container-top__search ::-webkit-input-placeholder { font-family: "Montserrat", sans-serif; font-size: 12px; color: #90A0B7; }
+
+.container-top__search :-ms-input-placeholder { font-family: "Montserrat", sans-serif; font-size: 12px; color: #90A0B7; }
+
+.container-top__search ::-ms-input-placeholder { font-family: "Montserrat", sans-serif; font-size: 12px; color: #90A0B7; }
+
+.container-top__search ::placeholder { font-family: "Montserrat", sans-serif; font-size: 12px; color: #90A0B7; }
+
+.container-top__search input { width: 230px; outline: none; border: 0; margin-left: 12px; outline-offset: 0; -webkit-box-shadow: none; box-shadow: none; color: #90A0B7; font-family: "Montserrat", sans-serif; color: #90A0B7; }
+
+.container-top-search-icon { width: 20px; height: 20px; }
+
+.container-top__notification { width: 32px; height: 32px; display: -ms-grid; display: grid; -webkit-box-align: center; -ms-flex-align: center; align-items: center; justify-items: center; }
+
+.container-top__notification button { width: 24px; height: 24px; position: relative; outline: none; background-color: #fff; border: none; }
+
+.container-top__notification :hover { cursor: pointer; }
+
+.container-top__notification img { position: relative; left: -6px; width: 24px; height: 24px; }
+
+.container-top__profile { display: -webkit-box; display: -ms-flexbox; display: flex; width: 32px; height: 32px; margin-left: 28px; border-radius: 50%; background: #884cb2; background: radial-gradient(circle, #884cb2 50%, #fd648e 100%); }
+
+.container-top__profile a { display: -ms-grid; display: grid; justify-items: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; width: 32px; height: 32px; }
+
+.container-top__profile a img { width: 26px; height: 26px; border-radius: 50%; border: 1px solid #fff; }
+
+.container-main { -ms-grid-row: 2; -ms-grid-row-span: 1; -ms-grid-column: 1; -ms-grid-column-span: 1; grid-area: 2 / 1 / 3 / 2; display: -webkit-box; display: -ms-flexbox; display: flex; margin-top: 48px; width: 100%; height: auto; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; }
+
+.container-main__task { width: calc(1374px - 400px); height: auto; padding: 0; margin: 0; font-family: "Poppins", sans-serif; }
+
+.container-main__task-onhold { margin-left: 10px; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; }
+
+.container-main__task-onhold h2 { font-family: "Poppins", sans-serif; font-weight: 300; font-size: 18px; }
+
+.container-main__task-onhold ul { margin: 0; padding: 0; }
+
+.container-main__task-onhold ul li { height: 56px; margin-left: 18px; }
+
+.container-main__task-onhold ul li::after { content: " "; display: block; height: 1px; width: 100%; margin-left: -20px; background-color: #E0E0E0; }
+
+.container-main__task-completed h2 { font-family: "Poppins", sans-serif; font-weight: 300; font-size: 18px; }
+
+.container-main__task-title { height: 54px; width: 595px; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; }
+
+.container-main h1 { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 36px; color: #000; margin: 0; padding: 0; }
+
+.container-main h1 span { color: #F3477A; }
+
+.container-main button { background-color: #884CB2; font-family: "Poppins", sans-serif; font-size: 12px; width: 139px; height: 34px; border-radius: 10px; outline: none; border: 0; color: #fff; display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; }
+
+.container-main button:hover { cursor: pointer; }
+
+.container-main button img { margin-right: 4px; }
+
+.container-main__chat { width: 294px; height: auto; background-color: #4d1e83; }
