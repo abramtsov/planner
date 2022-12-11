@@ -51,9 +51,9 @@
 
                 <div class="container__task-header">
                     <h1>
-                        You’ve got <span>7 task</span> today
+                        You’ve got <span>0 task</span> today
                     </h1>
-                    <button id="addtask">
+                    <button id="addtaskl" onclick="document.querySelector('dialog').showModal();">
                         <img src="img/plus_add.svg" alt="Add New">
                         Add New
                     </button>
@@ -171,7 +171,30 @@
 
         </main>
     </div>
-    <script src="js/script.js"></script>
+    <dialog class="addtask__container">
+        <div class="addtask__body">
+            <h1 class="addtask__title">Add new task</h1>
+            <form action="" class="addtask__form">
+                <div class="addtask__form-first">
+
+                    <input id="taskText" type="text" class="addtask__text" placeholder="Enter your task" required>
+                    <select name="" id="taskDifficulty" class="addtask__status">
+                        <option value="0">Minor</option>
+                        <option value="1">Normal</option>
+                        <option value="2">Critical</option>
+                    </select>
+                </div>
+
+                <div class="addtask__form-second">
+                    <button class="addtask__submit addtask__submit-cancel"
+                        onclick="document.querySelector('dialog').close();">Cancel</button>
+                    <input id="addtask" type="submit" class="addtask__submit" value="Add">
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <script type="module" src="js/script.js"></script>
 </body>
 
 </html>
