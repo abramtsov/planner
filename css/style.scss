@@ -967,7 +967,7 @@ body {
     &__scroll-container {
         width: 180px;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         height: 40px;
 
@@ -1463,4 +1463,19 @@ body {
 .li__fade {
     animation: fade .4s linear;
     animation-fill-mode: backwards;
+}
+
+.calendar__input_year {
+    padding: 0;
+    margin: 0;
+    width: 124px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 20px;
+    border: none;
+    border-bottom: 2px solid #888;
+    text-align: center;
+    justify-self: center;
 }

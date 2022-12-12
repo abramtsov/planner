@@ -231,11 +231,14 @@ export function dayToday(dateCurrent) {
 //функция вывода месяцев в году
 export function monthList() {
     let monthListContainer = document.querySelector('.calendar__month-list');
+    if (monthListContainer !== null) monthListContainer.innerHTML = "";
     if (monthListContainer) {
         for (let i = 0; i < 12; i++) {
             let monthListItem = document.createElement('div');
             monthListItem.classList.add('month');
-            let year = document.querySelector('.calendar__scroll-container p').innerText;
+            let year;
+            if (document.querySelector('.calendar__scroll-container p')) year = document.querySelector('.calendar__scroll-container p').innerText;
+            if (document.querySelector('.calendar__scroll-container input')) year = document.querySelector('.calendar__scroll-container input').value;
             if (dateCurrent.getFullYear() + "-" + dateCurrent.getMonth() === year + "-" + i) {
                 monthListItem.classList.add('month_current');
             }
