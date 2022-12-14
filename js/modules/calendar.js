@@ -90,7 +90,7 @@ function selectActiveDay() {
 }
 // выбор вида отображения
 function chooseViewChange() {
-    for (i = 0; i < chooseView.length; i++) {
+    for (let i = 0; i < chooseView.length; i++) {
         chooseView[i].classList.remove('calendar__choose_active');
     }
     this.classList.toggle('calendar__choose_active');
@@ -162,6 +162,11 @@ export function monthScroll() {
             }
             dayList(dateCurrent);
         };
+        monthBtnRight.addEventListener('click', () => {
+
+        })
+
+
         monthBtnLeft.onclick = () => {
             let dayInfoTrue = document.querySelector('.day__more');
             if (dayInfoTrue) dayInfoTrue.remove();
@@ -208,6 +213,11 @@ export function yearScroll() {
             document.querySelector('.calendar__month-list').innerHTML = "";
             monthList();
         };
+
+        yearBtnLeft.addEventListener('click', () => {
+
+        })
+
         yearBtnRight.onclick = function () {
             // dateCurrent.setFullYear(dateCurrent.getFullYear() + 1);
             yearCurrent.innerHTML = +yearCurrent.innerHTML + 1;
@@ -218,6 +228,37 @@ export function yearScroll() {
     else return;
 
 }
+//функция добавления возможности ввода года вручную
+export function inputYear() {
+    document.querySelector('.calendar__scroll-container').addEventListener('click', (e) => {
+        if (e.target.tagName == 'P' && e.target.innerHTML.length == 4) {
+            let year = document.querySelector('.calendar__scroll-container p').innerText;
+            document.querySelector('.calendar__scroll-container p').remove();
+            let arrow = document.querySelector('.calendar__arrow-right');
+            arrow.remove();
+            let arrow2 = document.querySelector('.calendar__arrow-left');
+            arrow2.remove();
+            let input = document.createElement('input');
+            input.type = 'number';
+            input.autofocus = 'true';
+            input.classList.add('calendar__input_year');
+            input.inputMode = 'numeric';
+            input.value = year;
+            document.querySelector('.calendar__scroll-container').append(input)
+            input.addEventListener('change', () => {
+                monthList();
+            })
+            input.addEventListener('blur', () => {
+                let yearP = document.createElement('p');
+                yearP.innerText = input.value;
+                document.querySelector('.calendar__scroll-container').innerHTML = "";
+                yearScroll();
+            })
+        }
+    })
+}
+
+
 //функция вывода сегодняшнего числа
 export function dayToday(dateCurrent) {
     dateCurrent = new Date();
