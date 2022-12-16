@@ -44,7 +44,7 @@ search.addEventListener('input', (e) => {
     }
     for (let i = 0; i < searchSrc.length; i++) {
         if (searchRes[i].innerText.search(search.value) != '-1') { //если нашлось
-            document.querySelector('.tasks__completed').classList.add('hide'); //скрываем Completed
+            if (document.querySelector('.tasks__completed')) document.querySelector('.tasks__completed').classList.add('hide'); //скрываем Completed
             arrRes.push(searchRes[i])
             document.querySelector('.tasks_onhold h2').innerText = 'Search Result';
             document.querySelector('.tasks_onhold ul').innerHTML = '';
@@ -59,7 +59,7 @@ search.addEventListener('input', (e) => {
                 document.querySelector('.tasks_onhold ul').innerHTML = '';
                 listOnhold();
                 listCompleted();
-                document.querySelector('.tasks__completed').classList.remove('hide');
+                if (document.querySelector('.tasks__completed')) document.querySelector('.tasks__completed').classList.remove('hide');
             }
         }
 
@@ -74,10 +74,6 @@ search.addEventListener('input', (e) => {
         document.querySelector('.tasks_onhold ul').innerHTML = '';
         listOnhold();
         listCompleted();
-        document.querySelector('.tasks__completed').classList.remove('hide');
+        if (document.querySelector('.tasks__completed')) document.querySelector('.tasks__completed').classList.remove('hide');
     }
-
 })
-
-
-

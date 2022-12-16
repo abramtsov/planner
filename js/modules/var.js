@@ -27,3 +27,14 @@ export let monthArr = [
     ['November', 'Nov'],
     ['December', 'Dec']
 ]
+export let status = [
+    ['0', 'Pending'],
+    ['1', 'In Progress'],
+    ['2', 'Canceled'],
+    ['3', 'Completed']
+]
+export let difficulty = [
+    ['0', 'Minor'],
+    ['1', 'Normal'],
+    ['2', 'Critical'],
+]

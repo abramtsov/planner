@@ -1,4 +1,4 @@
-
+import { status, difficulty } from './var.js';
 
 
 
@@ -19,8 +19,8 @@ export function taskMore() {
     container.addEventListener('click', function (e) {
         if (e.target.className == 'tasks__more') {
             let list;
-            if (e.originalTarget.parentNode.parentNode.parentNode.classList.contains('tasks_onhold')) list = JSON.parse(localStorage.getItem('Onhold')).reverse();
-            if (e.originalTarget.parentNode.parentNode.parentNode.classList.contains('tasks_completed')) return;
+            if (e.target.dataset.list == 'onhold') list = JSON.parse(localStorage.getItem('Onhold')).reverse();
+            if (e.target.dataset.list == 'completed') list = JSON.parse(localStorage.getItem('Completed')).reverse();
             if (e.target.spellcheck == true) {
                 if (document.querySelector('.addtask__additionally')) document.querySelector('.addtask__additionally').remove();
                 e.target.spellcheck = false;
@@ -33,7 +33,7 @@ export function taskMore() {
                 }
                 e.target.spellcheck = true;
                 let btnDiv = document.createElement('div');
-                taskMoreInf(btnDiv, list[e.target.dataset.listId]);
+                taskMoreInf(btnDiv, list[e.target.dataset.listId], list);
                 btnDiv.classList.add('addtask__additionally');
                 e.target.parentNode.appendChild(btnDiv);
             }
@@ -43,59 +43,32 @@ export function taskMore() {
 
 
 //Функция формирования данных о задании
-function taskMoreInf(div, id) {
-
+function taskMoreInf(div, id, list) {
     let divForm = document.createElement('form');
     let btnStatus = document.createElement('select');
     btnStatus.classList.add('addtask__status');
     //
-    let btnStatusOption = document.createElement('option');
-    btnStatusOption.innerHTML = 'Pending';
-    btnStatusOption.value = '0';
-    if (+id.status == +btnStatusOption.value) btnStatusOption.selected = true;
-    btnStatus.append(btnStatusOption);
+
+    for (let i = 0; i < status.length; i++) {
+        let btnStatusOption = document.createElement('option');
+        btnStatusOption.innerHTML = status[i][1];
+        btnStatusOption.value = status[i][0];
+        if (+id.status == +btnStatusOption.value) btnStatusOption.selected = true;
+        btnStatus.append(btnStatusOption);
+    }
     //
-    btnStatusOption = document.createElement('option');
-    btnStatusOption.innerHTML = 'In Progress';
-    btnStatusOption.value = '1';
-    if (+id.status == +btnStatusOption.value) btnStatusOption.selected = true;
-    btnStatus.append(btnStatusOption);
-    //
-    btnStatusOption = document.createElement('option');
-    btnStatusOption.innerHTML = 'Canceled';
-    btnStatusOption.value = '2';
-    if (+id.status == +btnStatusOption.value) btnStatusOption.selected = true;
-    btnStatus.append(btnStatusOption);
-    //
-    btnStatusOption = document.createElement('option');
-    btnStatusOption.innerHTML = 'Completed';
-    btnStatusOption.value = '3';
-    if (+id.status == +btnStatusOption.value) btnStatusOption.selected = true;
-    btnStatus.append(btnStatusOption);
     divForm.append(btnStatus);
     //
-
-
     let btnDifficult = document.createElement('select');
     btnDifficult.classList.add('addtask__status');
     //
-    let btnDifficultOption = document.createElement('option');
-    btnDifficultOption.innerHTML = 'Minor';
-    btnDifficultOption.value = '0';
-    if (+id.difficulty == +btnDifficultOption.value) btnDifficultOption.selected = true;
-    btnDifficult.append(btnDifficultOption);
-    //
-    btnDifficultOption = document.createElement('option');
-    btnDifficultOption.innerHTML = 'Normal';
-    btnDifficultOption.value = '1';
-    if (+id.difficulty == +btnDifficultOption.value) btnDifficultOption.selected = true;
-    btnDifficult.append(btnDifficultOption);
-    //
-    btnDifficultOption = document.createElement('option');
-    btnDifficultOption.innerHTML = 'Critical';
-    btnDifficultOption.value = '2';
-    if (+id.difficulty == +btnDifficultOption.value) btnDifficultOption.selected = true;
-    btnDifficult.append(btnDifficultOption);
+    for (let i = 0; i < difficulty.length; i++) {
+        let btnDifficultOption = document.createElement('option');
+        btnDifficultOption.innerHTML = difficulty[i][1];
+        btnDifficultOption.value = difficulty[i][0];
+        if (+id.difficulty == +btnDifficultOption.value) btnDifficultOption.selected = true;
+        btnDifficult.append(btnDifficultOption);
+    }
     //
     let btnDivSend = document.createElement('button');
     btnDivSend.classList.add('addtask__submit');
@@ -106,17 +79,15 @@ function taskMoreInf(div, id) {
     div.appendChild(divForm);
     btnDivSend.addEventListener('click', (e) => {
         e.preventDefault();
-        taskMoreChange(btnDivSend.parentNode.parentNode.previousElementSibling.dataset.listId, btnStatus.value, btnDifficult.value);
+        taskMoreChange(btnDivSend.parentNode.parentNode.previousElementSibling.dataset.listId, btnStatus.value, btnDifficult.value, list);
     })
-
         ;
 }
 
-function taskMoreChange(listId, status, difficulty) {
+function taskMoreChange(listId, status, difficulty, list) {
     listId = +listId;
     status = +status;
-    let onholdList = JSON.parse(localStorage.getItem('Onhold')).reverse();
-
+    let onholdList = list;
     onholdList[listId].status = status;
     onholdList[listId].difficulty = difficulty;
     if (onholdList[listId].status === 2 || onholdList[listId].status === 3) {
@@ -144,6 +115,9 @@ function taskMoreChange(listId, status, difficulty) {
     else {
         localStorage.removeItem('Onhold');
         localStorage.setItem('Onhold', JSON.stringify(onholdList.reverse()));
+
+
+
     }
     document.querySelector('.tasks_onhold ul').innerHTML = '';
     listOnhold();
@@ -332,15 +306,15 @@ export function listCompleted(once) {
     let liTitleCompleted = templateCompleted.content.querySelector('.tasks__text');
     let liImportanceCompleted = templateCompleted.content.querySelector('.tasks__importance');
     let liStatusCompleted = templateCompleted.content.querySelector('.tasks__status');
-    let btnCompleted = templateCompleted.content.querySelector('.tasks__more');
+    // let btnCompleted = templateCompleted.content.querySelector('.tasks__more');
     if (once) {
         liTitleCompleted.innerText = taskCompleted[0].text;
         liImportanceCompleted.className = '';
         liImportanceCompleted.classList.add('tasks__importance');
         liStatusCompleted.className = '';
         liStatusCompleted.classList.add('tasks__status');
-        btnCompleted.setAttribute('data-list', 'completed');
-        btnCompleted.setAttribute('data-list-id', taskCompleted[0].id);
+        // btnCompleted.setAttribute('data-list', 'completed');
+        // btnCompleted.setAttribute('data-list-id', taskCompleted[0].id);
         switch (taskCompleted[0].difficulty) {
             case '0':
                 liImportanceCompleted.classList.add('tasks__importance_minor');
@@ -359,7 +333,7 @@ export function listCompleted(once) {
         }
         switch (taskCompleted[0].status) {
             case 0:
-                liStatusOnhold.innerHTML = 'Pending';
+                liStatusCompleted.innerHTML = 'Pending';
                 liStatusCompleted.classList.add('tasks__status_pending');
                 break;
             case 1:
@@ -404,7 +378,7 @@ export function listCompleted(once) {
             }
             switch (taskCompleted[i].status) {
                 case 0:
-                    liStatusOnhold.innerHTML = 'Pending';
+                    liStatusCompleted.innerHTML = 'Pending';
                     liStatusCompleted.classList.add('tasks__status_pending');
                     break;
                 case 1:
@@ -436,8 +410,8 @@ export function listCompleted(once) {
             liImportanceCompleted.classList.add('tasks__importance');
             liStatusCompleted.className = '';
             liStatusCompleted.classList.add('tasks__status');
-            btnCompleted.setAttribute('data-list', 'completed');
-            btnCompleted.setAttribute('data-list-id', taskCompleted[0].id);
+            // btnCompleted.setAttribute('data-list', 'completed');
+            // btnCompleted.setAttribute('data-list-id', taskCompleted[0].id);
             switch (taskCompleted[i].difficulty) {
                 case '0':
                     liImportanceCompleted.innerHTML = 'Minor';
@@ -456,7 +430,7 @@ export function listCompleted(once) {
             }
             switch (taskCompleted[i].status) {
                 case 0:
-                    liStatusOnhold.innerHTML = 'Pending';
+                    liStatusCompleted.innerHTML = 'Pending';
                     liStatusCompleted.classList.add('tasks__status_pending');
                     break;
                 case 1:
