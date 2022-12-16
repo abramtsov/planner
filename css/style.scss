@@ -450,6 +450,10 @@ body {
             padding: 6px 30px 6px 18px;
             background: no-repeat left center url("../img/li.svg");
 
+            &.hide {
+                display: none
+            }
+
             &:last-child {
                 border: none;
             }
@@ -582,6 +586,9 @@ body {
 
             background: no-repeat left center url("../img/li_completed.svg");
 
+            &.hide {
+                display: none;
+            }
         }
 
         & li>* {
@@ -1480,4 +1487,14 @@ body {
     justify-self: center;
     appearance: none;
     -moz-appearance: textfield;
+}
+
+.hide {
+    display: none;
+}
+
+mark {
+    background-color: #db9aae;
+    // color: #fff;
+    // padding: 0 2px;
 }

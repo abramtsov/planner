@@ -315,7 +315,7 @@ export function listOnhold(once) {
 export function listCompleted(once) {
     let taskCompleted = JSON.parse(localStorage.getItem('Completed'));
     if (!taskCompleted) return;
-    let taskCompletedLength = taskCompleted.length;
+    // let taskCompletedLength = taskCompleted.length;
     let contTitleCompleted = document.createElement('div');
     contTitleCompleted.classList.add('tasks__completed');
     if (!document.querySelector('.tasks')) return;

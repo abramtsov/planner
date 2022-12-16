@@ -6,7 +6,7 @@ export function header() {
     <div class="container__search">
     <form class="container__search-form" action="#">
         <img src="img/search.svg" class="container__search-icon" alt="Поиск">
-        <input type="text" placeholder="Search for any training you want">
+        <input id="inputSearch" type="text" placeholder="Search for any training you want">
     </form>
 </div>
 <div class="container__notification">

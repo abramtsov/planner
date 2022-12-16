@@ -33,6 +33,51 @@ if (document.location.pathname.indexOf('index') == 1 || document.location.pathna
         }
     }
 }
+let search = document.querySelector('#inputSearch')
+let searchSrc = document.querySelectorAll('.tasks > ul li p.tasks__text');
+let searchRes = searchSrc;
+search.addEventListener('input', (e) => {
+    let arrRes = [];
+    function innerMark(str, pos, len) {
+        return str.slice(0, pos) + '<mark>' + str.slice(pos, pos + len) + '</mark>' + str.slice(pos + len);
+
+    }
+    for (let i = 0; i < searchSrc.length; i++) {
+        if (searchRes[i].innerText.search(search.value) != '-1') { //если нашлось
+            document.querySelector('.tasks__completed').classList.add('hide'); //скрываем Completed
+            arrRes.push(searchRes[i])
+            document.querySelector('.tasks_onhold h2').innerText = 'Search Result';
+            document.querySelector('.tasks_onhold ul').innerHTML = '';
+            document.querySelector('.tasks_completed ul').innerHTML = '';
+        }
+        else { // если не нашлось
+            searchSrc[i].parentNode.remove();
+            // проверка на наличие результата, если его нет, обновляем список
+            if (document.querySelectorAll('.tasks_onhold ul li').length == 0) {
+                document.querySelector('.tasks_onhold h2').innerText = 'On Hold';
+                document.querySelector('.tasks_completed ul').innerHTML = '';
+                document.querySelector('.tasks_onhold ul').innerHTML = '';
+                listOnhold();
+                listCompleted();
+                document.querySelector('.tasks__completed').classList.remove('hide');
+            }
+        }
+
+        for (let k = 0; k < arrRes.length; k++) {
+            arrRes[k].innerHTML = innerMark(arrRes[k].innerText, arrRes[k].innerText.search(search.value), search.value.length)
+            document.querySelector('.tasks_onhold ul').append(arrRes[k].parentNode)
+        }
+    }
+    if (search.value == '') {
+        document.querySelector('.tasks_onhold h2').innerText = 'On Hold';
+        document.querySelector('.tasks_completed ul').innerHTML = '';
+        document.querySelector('.tasks_onhold ul').innerHTML = '';
+        listOnhold();
+        listCompleted();
+        document.querySelector('.tasks__completed').classList.remove('hide');
+    }
+
+})
 
 
 
