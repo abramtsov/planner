@@ -69,9 +69,9 @@ search.addEventListener('input', (e) => {
         }
     }
     if (search.value == '') {
-        document.querySelector('.tasks_onhold h2').innerText = 'On Hold';
-        document.querySelector('.tasks_completed ul').innerHTML = '';
-        document.querySelector('.tasks_onhold ul').innerHTML = '';
+        if (document.querySelector('.tasks_onhold h2')) document.querySelector('.tasks_onhold h2').innerText = 'On Hold';
+        if (document.querySelector('.tasks_completed ul')) document.querySelector('.tasks_completed ul').innerHTML = '';
+        if (document.querySelector('.tasks_onhold ul')) document.querySelector('.tasks_onhold ul').innerHTML = '';
         listOnhold();
         listCompleted();
         if (document.querySelector('.tasks__completed')) document.querySelector('.tasks__completed').classList.remove('hide');
